@@ -8,18 +8,21 @@ system = BookLendingSystem()
 system.loginAdmin()
 while system.isAdmin:
     # Display the menu
+    menus = ["List Book","Add Book","Edit Book", "Lend Book", "Return Book", "Add Member", "Exit"]
     choose = system.showMenu()
-    if int(choose) == 1:
+    if int(choose) - 1 is menus.index("Add Book"):
         system.addBook()
-    elif int(choose) == 2:
+    elif int(choose) - 1 is menus.index("Edit Book") :
         system.editBook()
-    elif int(choose) == 3:
+    elif int(choose) - 1 is menus.index("List Book") :
+        system.listBook()
+    elif int(choose) - 1 is menus.index("Lend Book"):
         system.lendBook()
-    elif int(choose) == 4:
+    elif int(choose) - 1 is menus.index("Return Book"):
         system.returnBook()
-    elif int(choose) == 5:
+    elif int(choose) - 1 is menus.index("Add Member"):
         Member.addMember()
-    elif int(choose) == 6:
+    elif int(choose) - 1 is menus.index("Exit"):
         print("Bye")
         break
     else:

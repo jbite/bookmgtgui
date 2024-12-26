@@ -1,0 +1,9 @@
+{
+    "1": {
+        "bid": 1,
+        "bname": "aaa",
+        "available": true,
+        "borrower": [],
+        "price": 300.0
+    }
+}

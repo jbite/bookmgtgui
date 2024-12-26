@@ -1,3 +1,4 @@
+import os
 import private
 import utils
 from book import Book
@@ -6,9 +7,8 @@ class BookLendingSystem:
     def __init__(self):
         """Read book list from books.json
         """
-        if len(utils)
-        self.AvailableBooks = utils.Rbook()
-        print(self.AvailableBooks)
+        books = utils.Rbook()
+        self.AvailableBooks = books
         self.isAdmin = False
         self.currentAdmin = []
 
@@ -36,16 +36,21 @@ class BookLendingSystem:
         return False
     
     def showMenu(self):
+        menus = ["List Book","Add Book","Edit Book", "Lend Book", "Return Book", "Add Member", "Exit"]
         print("\nBook Lending System Menu:")
-        print("1. Add Book")
-        print("2. Edit Book")
-        print("3. Lend Book")
-        print("4. Return Book")
-        print("5. Add Member")
-        print("6. Exit")
+        for index, option in enumerate(menus):
+            print(f"{index+1}: {option}")
+
         choose = input("Choose: ")
         return choose
     
+    def listBook(self):
+        os.system('cls' if os.name == 'nt' else 'clear')
+        print(f"{"Book Name":<20}{"Credit":>10} ")
+        print("*"*30)
+        for value in self.AvailableBooks:
+            print(f"{self.AvailableBooks[value]["bname"]:<20}{self.AvailableBooks[value]["price"]:>10} ")
+
     def addBook(self):
         bid = int(input("Enter Book ID: "))
         bname = input("Enter Book Name: ")
@@ -54,7 +59,11 @@ class BookLendingSystem:
         book.bid = bid
         book.bname = bname
         book.price = price
-        self.AvailableBooks[bid] = book
+        
+        if self.AvailableBooks is None:
+            print(type(self.AvailableBooks))
+            self.AvailableBooks = {}
+        self.AvailableBooks[bid] = book.__dict__
         try:
             utils.Wbook(self.AvailableBooks)
             print("Book added successfully!")

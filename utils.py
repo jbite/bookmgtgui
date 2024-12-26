@@ -1,8 +1,9 @@
 import json
+from book import Book
 FILE = "books.json"
 
 def Wbook(books):
-    try:
+    try:   
         with open(FILE, "w") as f:
             json.dump(books, f, indent=4)  # indent for pretty printing
         print(f"JSON data written to {FILE}")
