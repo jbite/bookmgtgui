@@ -5,9 +5,25 @@ from member import Member
 
 # Create instances of the classes
 system = BookLendingSystem()
-# book = Book()  # You can create a Book instance if needed
-member = Member()
-admin = Admin()
+system.loginAdmin()
+while system.isAdmin:
+    # Display the menu
+    choose = system.showMenu()
+    if int(choose) == 1:
+        system.addBook()
+    elif int(choose) == 2:
+        system.editBook()
+    elif int(choose) == 3:
+        system.lendBook()
+    elif int(choose) == 4:
+        system.returnBook()
+    elif int(choose) == 5:
+        Member.addMember()
+    elif int(choose) == 6:
+        print("Bye")
+        break
+    else:
+        print("Error input")
 
-# Display the menu
-system.showMenu()
+    
+

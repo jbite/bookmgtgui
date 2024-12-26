@@ -1,16 +1,34 @@
+import private
+import utils
+from book import Book
+
 class BookLendingSystem:
     def __init__(self):
-        self.AvailableBooks = {}
+        """Read book list from books.json
+        """
+        if len(utils)
+        self.AvailableBooks = utils.Rbook()
+        print(self.AvailableBooks)
         self.isAdmin = False
+        self.currentAdmin = []
 
     def loginAdmin(self):
         username = input("Username: ")
         password = input("Password: ")
 
-        if username == "admin" and password == "A12345!":
-            self.isAdmin = True
-            return True
+        admins = private.ADMIN
+        if username in admins:
+            if password == admins[username]["passwd"]:
+                if username in self.currentAdmin:
+                    print(f"{username} is already login.")
+                    return False
+                else:
+                    self.isAdmin = True
+                    self.currentAdmin.append("username")
+                    print("Login success.")
+                return True
         else:
+            print("Username or password is not correct.")
             return False
         
     def logoutAdmin(self):
@@ -25,7 +43,9 @@ class BookLendingSystem:
         print("4. Return Book")
         print("5. Add Member")
         print("6. Exit")
-
+        choose = input("Choose: ")
+        return choose
+    
     def addBook(self):
         bid = int(input("Enter Book ID: "))
         bname = input("Enter Book Name: ")
@@ -35,7 +55,13 @@ class BookLendingSystem:
         book.bname = bname
         book.price = price
         self.AvailableBooks[bid] = book
-        print("Book added successfully!")
+        try:
+            utils.Wbook(self.AvailableBooks)
+            print("Book added successfully!")
+        except IOError as e:
+            print(e)
+            
+
 
     def editBook(self):
         bid = int(input("Enter Book ID to edit: "))

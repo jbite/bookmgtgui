@@ -1,3 +1,4 @@
+from member import Member
 class Admin:
     def __init__(self,aid,username):
         self.aid = 0
