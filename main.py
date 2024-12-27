@@ -2,27 +2,28 @@ from booklendsystem import BookLendingSystem
 from admin import Admin
 from book import Book
 from member import Member
+import utils
 
 # Create instances of the classes
 system = BookLendingSystem()
 system.loginAdmin()
 while system.isAdmin:
     # Display the menu
-    menus = ["List Book","Add Book","Edit Book", "Lend Book", "Return Book", "Add Member", "Exit"]
+    utils.MENUS = ["List Book","Add Book","Edit Book", "Lend Book", "Return Book", "Add Member", "Exit"]
     choose = system.showMenu()
-    if int(choose) - 1 is menus.index("Add Book"):
+    if int(choose) - 1 is utils.MENUS.index("Add Book"):
         system.addBook()
-    elif int(choose) - 1 is menus.index("Edit Book") :
+    elif int(choose) - 1 is utils.MENUS.index("Edit Book") :
         system.editBook()
-    elif int(choose) - 1 is menus.index("List Book") :
+    elif int(choose) - 1 is utils.MENUS.index("List Book") :
         system.listBook()
-    elif int(choose) - 1 is menus.index("Lend Book"):
+    elif int(choose) - 1 is utils.MENUS.index("Lend Book"):
         system.lendBook()
-    elif int(choose) - 1 is menus.index("Return Book"):
+    elif int(choose) - 1 is utils.MENUS.index("Return Book"):
         system.returnBook()
-    elif int(choose) - 1 is menus.index("Add Member"):
+    elif int(choose) - 1 is utils.MENUS.index("Add Member"):
         Member.addMember()
-    elif int(choose) - 1 is menus.index("Exit"):
+    elif int(choose) - 1 is utils.MENUS.index("Exit"):
         print("Bye")
         break
     else:

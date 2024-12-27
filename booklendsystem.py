@@ -36,9 +36,9 @@ class BookLendingSystem:
         return False
     
     def showMenu(self):
-        menus = ["List Book","Add Book","Edit Book", "Lend Book", "Return Book", "Add Member", "Exit"]
+        
         print("\nBook Lending System Menu:")
-        for index, option in enumerate(menus):
+        for index, option in enumerate(utils.MENUS):
             print(f"{index+1}: {option}")
 
         choose = input("Choose: ")
@@ -49,16 +49,14 @@ class BookLendingSystem:
         print(f"{"Book Name":<20}{"Credit":>10} ")
         print("*"*30)
         for value in self.AvailableBooks:
-            print(f"{self.AvailableBooks[value]["bname"]:<20}{self.AvailableBooks[value]["price"]:>10} ")
+            print(f"{self.AvailableBooks[value]["bname"]:<20}\
+                {self.AvailableBooks[value]["price"]:>10} ")
 
     def addBook(self):
-        bid = int(input("Enter Book ID: "))
+        bid = input("Enter Book ID: ")
         bname = input("Enter Book Name: ")
         price = float(input("Enter Book Price: "))
-        book = Book()
-        book.bid = bid
-        book.bname = bname
-        book.price = price
+        book = Book(bid=bid,bname=bname,price=price)
         
         if self.AvailableBooks is None:
             print(type(self.AvailableBooks))
@@ -71,14 +69,13 @@ class BookLendingSystem:
             print(e)
             
 
-
     def editBook(self):
-        bid = int(input("Enter Book ID to edit: "))
+        self.listBook()
+        bid = input("Enter Book ID to edit: ")
         if bid in self.AvailableBooks:
             book = self.AvailableBooks[bid]
-            book.bname = input("Enter new Book Name: ")
-            book.price = float(input("Enter new Book Price: "))
-            book.available = input("Is the book available (True/False): ").lower() == "true"
+            book["bname"] = input("Enter new Book Name: ")
+            book["price"] = float(input("Enter new Book Price: "))
             print("Book updated successfully!")
         else:
             print("Book not found!")
@@ -88,9 +85,10 @@ class BookLendingSystem:
         bid = int(input("Enter Book ID to lend: "))
         if bid in self.AvailableBooks:
             book = self.AvailableBooks[bid]
-            if book.available:
-                book.available = False
-                book.borrower.append(mid)
+            if book["available"] and member["credit"] > book["price"]:
+                book["available"] = False
+                book["borrower"].append(mid)
+                member = member["credit"] - book["price"]
                 print("Book lent successfully!")
             else:
                 print("Book is not currently available.")

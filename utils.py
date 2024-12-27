@@ -1,6 +1,8 @@
 import json
+import os
 from book import Book
 FILE = "books.json"
+MENUS = ["List Book","Add Book","Edit Book", "Lend Book", "Return Book", "Add Member", "Exit"]
 
 def Wbook(books):
     try:   
@@ -23,3 +25,4 @@ def Rbook():
         print(f"Error decoding JSON: {e}")
     except IOError as e:
         print(f"Error reading from file: {e}")
+        
